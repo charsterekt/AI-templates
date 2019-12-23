@@ -56,6 +56,27 @@ def leaky_relu(input, derivative=False):
     else:
         return max(0, input) + min(0, input * 0.01)
 
+	
+def softmax(net_outputs: List[float], derivative=False) -> List[float]:
+    output = []
+    if derivative:
+        pass
+    else:
+        for value in net_outputs:
+            output.append(exp(value)/sum(net_outputs))
+        return output
+
+	
+def stable_softmax(net_outputs: List[float], derivative=False) -> List[float]:
+    if derivative:
+        pass
+    else:
+        max_output = max(net_outputs)
+        shift = [exp(v - max_output) for v in net_outputs]
+        sum_output = sum(shift)
+        output = [value / sum_output for value in shift]
+        return output
+
 
 class Neuron:
     def __init__(self, layer, previous_layer=None):
