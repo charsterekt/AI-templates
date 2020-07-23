@@ -233,8 +233,8 @@ class Neuron:
         # This is the loop we spoke of
         for dendron in self.dendrons:
             delta_weight = gradient * learning_rate * dendron.source_neuron.output
-            dendron.adjust_weight(delta_weight)
             dendron.pass_gradient(gradient)
+            dendron.adjust_weight(delta_weight)
         # We need to make the bias learn right here as well
         self.bias += gradient * learning_rate * 1
         # There is no output from the neuron since it's 1 for bias right now.
