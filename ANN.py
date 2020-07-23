@@ -116,8 +116,8 @@ class Neuron:
         learning_rate = self.layer.network.learning_rate
         for dendron in self.dendrons:
             delta_weight = gradient * learning_rate * dendron.source_neuron.output
-            dendron.adjust_weight(delta_weight)
             dendron.pass_gradient(gradient)
+	    dendron.adjust_weight(delta_weight)
         self.bias += gradient * learning_rate * 1
         self.error = 0
 
